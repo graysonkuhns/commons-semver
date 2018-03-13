@@ -17,7 +17,10 @@ public class SemanticVersionModule extends AbstractModule {
   protected void configure() {
     // Semantic version factory
     install(new FactoryModuleBuilder()
-      .implement(SemanticVersion.class, DefaultSemanticVersion.class)
-      .build(SemanticVersionFactory.class));
+        .implement(SemanticVersion.class, DefaultSemanticVersion.class)
+        .build(SemanticVersionFactory.class));
+
+    // Semantic version builder
+    bind(SemanticVersionBuilder.class).to(DefaultSemanticVersionBuilder.class);
   }
 }
