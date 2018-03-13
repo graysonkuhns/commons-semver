@@ -18,4 +18,9 @@ public class SemanticVersionModuleTest {
   public void provision__SemanticVersionFactory__Test() {
     injector.getInstance(SemanticVersionFactory.class);
   }
+
+  @Test
+  public void provision__SemanticVersionBuilder__Test() {
+    injector.getInstance(SemanticVersionBuilder.class);
+  }
 }
