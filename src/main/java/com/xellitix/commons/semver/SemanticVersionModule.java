@@ -22,5 +22,8 @@ public class SemanticVersionModule extends AbstractModule {
 
     // Semantic version builder
     bind(SemanticVersionBuilder.class).to(DefaultSemanticVersionBuilder.class);
+
+    // Semantic version parser
+    bind(SemanticVersionParser.class).to(DefaultSemanticVersionParser.class);
   }
 }
