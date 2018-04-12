@@ -11,10 +11,6 @@ import java.util.regex.Pattern;
  */
 public class DefaultSemanticVersionParser implements SemanticVersionParser {
 
-  // Messages
-  private static final String INVALID_SEMVER_MSG_TEMPLATE =
-      "Expected a valid Semantic Version. \"%s\" received.";
-
   // Constants
   private static final String VERSION_REGEX = "^(\\d+)\\.(\\d+)\\.(\\d+).*$";
 
@@ -43,16 +39,16 @@ public class DefaultSemanticVersionParser implements SemanticVersionParser {
    *
    * @param version The version string.
    * @return The {@link SemanticVersion}.
-   * @throws IllegalArgumentException If the version string is not a valid semantic version.
+   * @throws InvalidSemanticVersionException If the version string is not a valid semantic version.
    */
   @Override
-  public SemanticVersion parse(final String version) throws IllegalArgumentException {
+  public SemanticVersion parse(final String version) throws InvalidSemanticVersionException {
     // Create REGEX matcher
     final Matcher matcher = versionPattern.matcher(version);
 
     // Handle invalid version strings
     if (!matcher.find()) {
-      throw new IllegalArgumentException(String.format(INVALID_SEMVER_MSG_TEMPLATE, version));
+      throw new InvalidSemanticVersionException(version);
     }
 
     // Extract version components

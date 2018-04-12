@@ -23,8 +23,6 @@ public class DefaultSemanticVersionParserTest {
   private static final String SEMVER_SIMPLE = "5.10.0";
   private static final String SEMVER_METADATA = "1.0.0-rc.1+build.1";
   private static final String SEMVER_INVALID = "2.3";
-  private static final String SEMVER_INVALID_MSG =
-      "Expected a valid Semantic Version. \"2.3\" received.";
 
   // Rules
   @Rule
@@ -62,8 +60,8 @@ public class DefaultSemanticVersionParserTest {
   @Test
   public void exceptionIsThrown__WhenVersionIsInvalid__Test() {
     // Describe the exception to expect
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage(SEMVER_INVALID_MSG);
+    thrown.expect(InvalidSemanticVersionException.class);
+    thrown.expect(InvalidSemanticVersionExceptionMatcher.hasInvalidVersion(SEMVER_INVALID));
 
     // Attempt to parse the version
     versionParser.parse(SEMVER_INVALID);
