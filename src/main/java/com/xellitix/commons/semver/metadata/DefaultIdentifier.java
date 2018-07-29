@@ -1,5 +1,7 @@
 package com.xellitix.commons.semver.metadata;
 
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import java.math.BigInteger;
 
 /**
@@ -18,7 +20,8 @@ public class DefaultIdentifier implements Identifier {
    *
    * @param value The value.
    */
-  DefaultIdentifier(final String value) {
+  @Inject
+  DefaultIdentifier(@Assisted final String value) {
     this.value = value;
 
     // Determine if the value is numeric
@@ -67,7 +70,7 @@ public class DefaultIdentifier implements Identifier {
    * Compares against another {@link Identifier}.
    *
    * @param other The {@link Identifier} to compare against.
-   * @return
+   * @return A negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
    */
   @Override
   public int compareTo(final Identifier other) {

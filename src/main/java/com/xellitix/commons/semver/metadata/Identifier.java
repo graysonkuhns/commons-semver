@@ -1,11 +1,13 @@
 package com.xellitix.commons.semver.metadata;
 
+import java.io.Serializable;
+
 /**
  * Metadata identifier.
  *
  * @author Grayson Kuhns
  */
-public interface Identifier extends Comparable<Identifier> {
+public interface Identifier extends Serializable, Comparable<Identifier> {
 
   /**
    * Gets the value.
