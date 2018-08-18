@@ -19,5 +19,10 @@ public class MetadataModule extends AbstractModule {
     install(new FactoryModuleBuilder()
       .implement(Identifier.class, DefaultIdentifier.class)
       .build(IdentifierFactory.class));
+
+    // Metadata factory
+    install(new FactoryModuleBuilder()
+      .implement(Metadata.class, DefaultMetadata.class)
+      .build(MetadataFactory.class));
   }
 }

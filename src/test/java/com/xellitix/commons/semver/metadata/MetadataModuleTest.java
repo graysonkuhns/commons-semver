@@ -20,6 +20,11 @@ public class MetadataModuleTest {
   }
 
   @Test
+  public void provision__MetadataFactory__Test() {
+    injector.getInstance(MetadataFactory.class);
+  }
+
+  @Test
   public void provision__BuildMetadataIdentifierValidator__Test() {
     injector.getInstance(BuildMetadataIdentifierValidator.class);
   }
