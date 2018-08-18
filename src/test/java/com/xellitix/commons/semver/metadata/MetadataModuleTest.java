@@ -23,4 +23,9 @@ public class MetadataModuleTest {
   public void provision__BuildMetadataIdentifierValidator__Test() {
     injector.getInstance(BuildMetadataIdentifierValidator.class);
   }
+
+  @Test
+  public void provision__PreReleaseMetadataIdentifierValidator__Test() {
+    injector.getInstance(PreReleaseMetadataIdentifierValidator.class);
+  }
 }
