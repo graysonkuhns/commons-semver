@@ -1,5 +1,7 @@
 package com.xellitix.commons.semver.metadata;
 
+import com.google.inject.Singleton;
+
 /**
  * {@link IdentifierValidator} that validates that the {@link Identifier} value is non-empty.
  *
@@ -10,6 +12,7 @@ package com.xellitix.commons.semver.metadata;
  *
  * @author Grayson Kuhns
  */
+@Singleton
 public class NonEmptyIdentifierValidator implements IdentifierValidator {
 
   /**
