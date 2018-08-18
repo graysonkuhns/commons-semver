@@ -15,6 +15,7 @@ public class MetadataModule extends AbstractModule {
    */
   @Override
   protected void configure() {
+    // Identifier factory
     install(new FactoryModuleBuilder()
       .implement(Identifier.class, DefaultIdentifier.class)
       .build(IdentifierFactory.class));
