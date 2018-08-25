@@ -1,6 +1,8 @@
 package com.xellitix.commons.semver;
 
+import com.xellitix.commons.semver.metadata.Metadata;
 import java.io.Serializable;
+import java.util.Optional;
 
 /**
  * Semantic version model.
@@ -29,4 +31,18 @@ public interface SemanticVersion extends Serializable {
    * @return The patch version.
    */
   int getPatchVersion();
+
+  /**
+   * Gets the pre-release {@link Metadata}.
+   *
+   * @return An {@link Optional} containing the pre-release {@link Metadata}.
+   */
+  Optional<Metadata> getPreReleaseMetadata();
+
+  /**
+   * Gets the build {@link Metadata}.
+   *
+   * @return An {@link Optional} containing the build {@link Metadata}.
+   */
+  Optional<Metadata> getBuildMetadata();
 }

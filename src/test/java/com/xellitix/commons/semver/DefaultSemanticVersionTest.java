@@ -18,7 +18,7 @@ public class DefaultSemanticVersionTest {
   private static final int PATCH = 22;
 
   // Fixtures
-  private final DefaultSemanticVersion version = new DefaultSemanticVersion(MAJOR, MINOR, PATCH);
+  private final DefaultSemanticVersion version = new DefaultSemanticVersion(MAJOR, MINOR, PATCH, null, null);
 
   @Test
   public void toStringTest() {

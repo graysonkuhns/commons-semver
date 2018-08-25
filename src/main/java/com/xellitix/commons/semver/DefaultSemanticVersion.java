@@ -1,7 +1,8 @@
 package com.xellitix.commons.semver;
 
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
+import com.xellitix.commons.semver.metadata.Metadata;
+import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  * Default {@link SemanticVersion} implementation.
@@ -14,6 +15,8 @@ public class DefaultSemanticVersion implements SemanticVersion {
   private final int major;
   private final int minor;
   private final int patch;
+  private final Metadata preReleaseMetadata;
+  private final Metadata buildMetadata;
 
   /**
    * Constructor.
@@ -21,16 +24,21 @@ public class DefaultSemanticVersion implements SemanticVersion {
    * @param major The major version.
    * @param minor The minor version.
    * @param patch The patch version;
+   * @param preReleaseMetadata The pre-release {@link Metadata}.
+   * @param buildMetadata The build {@link Metadata}.
    */
-  @Inject
   DefaultSemanticVersion(
-      @Assisted("major") final int major,
-      @Assisted("minor") final int minor,
-      @Assisted("patch") final int patch) {
+      final int major,
+      final int minor,
+      final int patch,
+      @Nullable final Metadata preReleaseMetadata,
+      @Nullable final Metadata buildMetadata) {
 
     this.major = major;
     this.minor = minor;
     this.patch = patch;
+    this.preReleaseMetadata = preReleaseMetadata;
+    this.buildMetadata = buildMetadata;
   }
 
   /**
@@ -61,6 +69,26 @@ public class DefaultSemanticVersion implements SemanticVersion {
   @Override
   public int getPatchVersion() {
     return patch;
+  }
+
+  /**
+   * Gets the pre-release {@link Metadata}.
+   *
+   * @return An {@link Optional} containing the pre-release {@link Metadata}.
+   */
+  @Override
+  public Optional<Metadata> getPreReleaseMetadata() {
+    return Optional.ofNullable(preReleaseMetadata);
+  }
+
+  /**
+   * Gets the build {@link Metadata}.
+   *
+   * @return An {@link Optional} containing the build {@link Metadata}.
+   */
+  @Override
+  public Optional<Metadata> getBuildMetadata() {
+    return Optional.ofNullable(buildMetadata);
   }
 
   /**
