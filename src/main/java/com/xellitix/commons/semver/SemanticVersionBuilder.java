@@ -1,5 +1,8 @@
 package com.xellitix.commons.semver;
 
+import com.xellitix.commons.semver.metadata.Identifier;
+import com.xellitix.commons.semver.metadata.Metadata;
+
 /**
  * {@link SemanticVersion} builder.
  *
@@ -51,6 +54,36 @@ public interface SemanticVersionBuilder {
    * @return The patch version.
    */
   int getPatchVersion();
+
+  /**
+   * Adds a pre-release {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   */
+  SemanticVersionBuilder addPreReleaseMetadataIdentifier(Identifier identifier);
+
+  /**
+   * Clears the pre-release {@link Metadata}.
+   *
+   * @return The {@link SemanticVersionBuilder}.
+   */
+  SemanticVersionBuilder clearPreReleaseMetadata();
+
+  /**
+   * Adds a build {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   */
+  SemanticVersionBuilder addBuildMetadataIdentifier(Identifier identifier);
+
+  /**
+   * Clears the build {@link Metadata}.
+   *
+   * @return The {@link SemanticVersionBuilder}.
+   */
+  SemanticVersionBuilder clearBuildMetadata();
 
   /**
    * Builds a {@link SemanticVersion}.
