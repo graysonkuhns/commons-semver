@@ -92,6 +92,6 @@ public class DefaultSemanticVersionBuilderTest {
         .create(anyInt(), anyInt(), anyInt());
 
     // Create builder
-    versionBuilder = new DefaultSemanticVersionBuilder(versionFactory);
+    versionBuilder = new DefaultSemanticVersionBuilder(versionFactory, null, null, null);
   }
 }
