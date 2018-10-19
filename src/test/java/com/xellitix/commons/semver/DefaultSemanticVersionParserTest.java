@@ -77,6 +77,6 @@ public class DefaultSemanticVersionParserTest {
         .create(anyInt(), anyInt(), anyInt());
 
     // Create the parser
-    versionParser = new DefaultSemanticVersionParser(versionFactory);
+    versionParser = new DefaultSemanticVersionParser(versionFactory, null, null, null);
   }
 }
