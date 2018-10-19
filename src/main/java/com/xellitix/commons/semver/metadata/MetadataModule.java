@@ -24,5 +24,8 @@ public class MetadataModule extends AbstractModule {
     install(new FactoryModuleBuilder()
       .implement(Metadata.class, DefaultMetadata.class)
       .build(MetadataFactory.class));
+
+    // Metadata parser
+    bind(MetadataParser.class).to(DefaultMetadataParser.class);
   }
 }
