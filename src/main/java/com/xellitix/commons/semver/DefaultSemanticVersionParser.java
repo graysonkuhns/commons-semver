@@ -115,6 +115,10 @@ public class DefaultSemanticVersionParser implements SemanticVersionParser {
 
     Metadata metadata = metadataParser.parse(identifiers);
 
+    if (metadata == null) {
+      return null;
+    }
+
     if (!validator.isValid(metadata)) {
       throw new InvalidSemanticVersionException(version);
     }
