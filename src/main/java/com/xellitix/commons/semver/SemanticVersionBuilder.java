@@ -16,7 +16,7 @@ public interface SemanticVersionBuilder {
    * @param major The major version.
    * @return The {@link SemanticVersionBuilder}.
    */
-  SemanticVersionBuilder withMajorVersion(int major);
+  SemanticVersionBuilder setMajorVersion(int major);
 
   /**
    * Gets the major version.
@@ -31,7 +31,7 @@ public interface SemanticVersionBuilder {
    * @param minor The minor version.
    * @return The {@link SemanticVersionBuilder}.
    */
-  SemanticVersionBuilder withMinorVersion(int minor);
+  SemanticVersionBuilder setMinorVersion(int minor);
 
   /**
    * Gets the minor version.
@@ -46,7 +46,7 @@ public interface SemanticVersionBuilder {
    * @param patch The patch version.
    * @return The {@link SemanticVersionBuilder}.
    */
-  SemanticVersionBuilder withPatchVersion(int patch);
+  SemanticVersionBuilder setPatchVersion(int patch);
 
   /**
    * Gets the patch version.

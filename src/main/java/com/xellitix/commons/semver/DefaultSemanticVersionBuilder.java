@@ -3,6 +3,7 @@ package com.xellitix.commons.semver;
 import com.google.inject.Inject;
 import com.xellitix.commons.semver.metadata.BuildMetadataIdentifierValidator;
 import com.xellitix.commons.semver.metadata.Identifier;
+import com.xellitix.commons.semver.metadata.InvalidMetadataIdentifierException;
 import com.xellitix.commons.semver.metadata.Metadata;
 import com.xellitix.commons.semver.metadata.MetadataFactory;
 import com.xellitix.commons.semver.metadata.PreReleaseMetadataIdentifierValidator;
@@ -33,6 +34,9 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    * Constructor.
    *
    * @param versionFactory The {@link SemanticVersionFactory}.
+   * @param metadataFactory The {@link MetadataFactory}.
+   * @param preReleaseIdentifierValidator The {@link PreReleaseMetadataIdentifierValidator}.
+   * @param buildIdentifierValidator The {@link BuildMetadataIdentifierValidator}.
    */
   @Inject
   DefaultSemanticVersionBuilder(
@@ -62,7 +66,7 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    * @return The {@link SemanticVersionBuilder}.
    */
   @Override
-  public DefaultSemanticVersionBuilder withMajorVersion(int major) {
+  public DefaultSemanticVersionBuilder setMajorVersion(int major) {
     this.major = major;
     return this;
   }
@@ -84,7 +88,7 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    * @return The {@link SemanticVersionBuilder}.
    */
   @Override
-  public DefaultSemanticVersionBuilder withMinorVersion(int minor) {
+  public DefaultSemanticVersionBuilder setMinorVersion(int minor) {
     this.minor = minor;
     return this;
   }
@@ -106,7 +110,7 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    * @return The {@link SemanticVersionBuilder}.
    */
   @Override
-  public DefaultSemanticVersionBuilder withPatchVersion(int patch) {
+  public DefaultSemanticVersionBuilder setPatchVersion(int patch) {
     this.patch = patch;
     return this;
   }
@@ -126,12 +130,12 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    *
    * @param identifier The {@link Identifier}.
    * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
    */
   @Override
-  public SemanticVersionBuilder addPreReleaseMetadataIdentifier(final Identifier identifier) {
+  public SemanticVersionBuilder addPreReleaseMetadataIdentifier(final Identifier identifier) throws InvalidMetadataIdentifierException {
     if (!preReleaseIdentifierValidator.isValid(identifier)) {
-      // todo: Throw exception
-      return this;
+      throw new InvalidMetadataIdentifierException(identifier);
     }
 
     preReleaseIdentifiers.add(identifier);
@@ -154,12 +158,12 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    *
    * @param identifier The {@link Identifier}.
    * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
    */
   @Override
-  public SemanticVersionBuilder addBuildMetadataIdentifier(final Identifier identifier) {
+  public SemanticVersionBuilder addBuildMetadataIdentifier(final Identifier identifier) throws InvalidMetadataIdentifierException {
     if (!buildIdentifierValidator.isValid(identifier)) {
-      // todo: throw exception
-      return this;
+      throw new InvalidMetadataIdentifierException(identifier);
     }
 
     buildIdentifiers.add(identifier);
@@ -173,7 +177,8 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    */
   @Override
   public SemanticVersionBuilder clearBuildMetadata() {
-    return null;
+    buildIdentifiers.clear();
+    return this;
   }
 
   /**
@@ -183,6 +188,11 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    */
   @Override
   public SemanticVersion build() {
-    return versionFactory.create(major, minor, patch);
+    return versionFactory.create(
+        major,
+        minor,
+        patch,
+        preReleaseIdentifiers.isEmpty() ? null : metadataFactory.create(preReleaseIdentifiers),
+        buildIdentifiers.isEmpty() ? null : metadataFactory.create(buildIdentifiers));
   }
 }
