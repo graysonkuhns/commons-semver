@@ -6,6 +6,7 @@ import com.xellitix.commons.semver.metadata.BuildMetadataValidator;
 import com.xellitix.commons.semver.metadata.Metadata;
 import com.xellitix.commons.semver.metadata.MetadataFactory;
 import com.xellitix.commons.semver.metadata.MetadataParser;
+import com.xellitix.commons.semver.metadata.MetadataValidator;
 import com.xellitix.commons.semver.metadata.PreReleaseMetadataIdentifierValidator;
 import com.xellitix.commons.semver.metadata.PreReleaseMetadataValidator;
 import java.util.regex.Matcher;
@@ -87,28 +88,8 @@ public class DefaultSemanticVersionParser implements SemanticVersionParser {
     final String buildIdentifiers = matcher.group(5);
 
     // Parse metadata components
-    Metadata preReleaseMetadata;
-    Metadata buildMetadata;
-
-    if (preReleaseIdentifiers == null) {
-      preReleaseMetadata = null;
-    } else {
-      preReleaseMetadata = metadataParser.parse(preReleaseIdentifiers);
-
-      if (!preReleaseMetadataValidator.isValid(preReleaseMetadata)) {
-        throw new InvalidSemanticVersionException(version);
-      }
-    }
-
-    if (buildIdentifiers == null) {
-      buildMetadata = null;
-    } else {
-      buildMetadata = metadataParser.parse(buildIdentifiers);
-
-      if (!buildMetadataValidator.isValid(buildMetadata)) {
-        throw new InvalidSemanticVersionException(version);
-      }
-    }
+    Metadata preReleaseMetadata = parseMetadata(preReleaseIdentifiers, version, preReleaseMetadataValidator);
+    Metadata buildMetadata = parseMetadata(buildIdentifiers, version, buildMetadataValidator);
 
     // Create the version model
     return versionFactory.create(
@@ -117,5 +98,27 @@ public class DefaultSemanticVersionParser implements SemanticVersionParser {
         patchVersion,
         preReleaseMetadata,
         buildMetadata);
+  }
+
+  private Metadata parseMetadata(
+      final String identifiers,
+      final String version,
+      final MetadataValidator validator) {
+
+    if (identifiers == null) {
+      return null;
+    }
+
+    if (identifiers.isEmpty()) {
+      return null;
+    }
+
+    Metadata metadata = metadataParser.parse(identifiers);
+
+    if (!validator.isValid(metadata)) {
+      throw new InvalidSemanticVersionException(version);
+    }
+
+    return metadata;
   }
 }
