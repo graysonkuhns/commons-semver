@@ -3,6 +3,7 @@ package com.xellitix.commons.semver.metadata;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.math.BigInteger;
+import java.util.Objects;
 
 /**
  * Default {@link Identifier} implementation.
@@ -106,5 +107,24 @@ public class DefaultIdentifier implements Identifier {
     // At this point we know that both identifiers are non-numeric
     // Perform lexicographical comparison
     return value.compareTo(other.getValue());
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+
+    if (!(o instanceof Identifier)) {
+      return false;
+    }
+
+    Identifier other = (Identifier) o;
+    return value.equals(other.getValue());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(value);
   }
 }

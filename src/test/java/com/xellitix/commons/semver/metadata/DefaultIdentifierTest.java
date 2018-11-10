@@ -123,4 +123,44 @@ public class DefaultIdentifierTest {
         .isNotNull()
         .isEqualTo("fooBar");
   }
+
+  // #equals
+  @Test
+  public void equalsReturnsTrue__WhenIdentifiersAreEqual__Test() {
+    DefaultIdentifier alpha1 = new DefaultIdentifier("alpha");
+    DefaultIdentifier alpha2 = new DefaultIdentifier("alpha");
+
+    assertThat(alpha1
+        .equals(alpha2))
+        .isTrue();
+  }
+
+  @Test
+  public void equalsReturnsFalse__WhenIdentifiersAreNotEqual__Test() {
+    DefaultIdentifier alpha = new DefaultIdentifier("alpha");
+    DefaultIdentifier beta = new DefaultIdentifier("beta");
+
+    assertThat(alpha
+        .equals(beta))
+        .isFalse();
+  }
+
+  // #hashCode
+  @Test
+  public void hashCodeIsTheSame__WhenIdentifiersAreEqual__Test() {
+    DefaultIdentifier alpha1 = new DefaultIdentifier("alpha");
+    DefaultIdentifier alpha2 = new DefaultIdentifier("alpha");
+
+    assertThat(alpha1.hashCode())
+        .isEqualTo(alpha2.hashCode());
+  }
+
+  @Test
+  public void hashCodeIsDifferent__WhenIdentifiersAreNotEqual__Test() {
+    DefaultIdentifier alpha = new DefaultIdentifier("alpha");
+    DefaultIdentifier beta = new DefaultIdentifier("beta");
+
+    assertThat(alpha.hashCode())
+        .isNotEqualTo(beta.hashCode());
+  }
 }
