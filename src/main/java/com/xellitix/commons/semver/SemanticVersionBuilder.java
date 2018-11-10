@@ -64,6 +64,14 @@ public interface SemanticVersionBuilder {
   SemanticVersionBuilder addPreReleaseMetadataIdentifier(Identifier identifier);
 
   /**
+   * Adds a pre-release {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   */
+  SemanticVersionBuilder addPreReleaseMetadataIdentifier(String identifier);
+
+  /**
    * Clears the pre-release {@link Metadata}.
    *
    * @return The {@link SemanticVersionBuilder}.
@@ -77,6 +85,14 @@ public interface SemanticVersionBuilder {
    * @return The {@link SemanticVersionBuilder}.
    */
   SemanticVersionBuilder addBuildMetadataIdentifier(Identifier identifier);
+
+  /**
+   * Adds a build {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   */
+  SemanticVersionBuilder addBuildMetadataIdentifier(String identifier);
 
   /**
    * Clears the build {@link Metadata}.

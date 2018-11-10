@@ -11,6 +11,7 @@ import static org.mockito.Mockito.verify;
 
 import com.xellitix.commons.semver.metadata.BuildMetadataIdentifierValidator;
 import com.xellitix.commons.semver.metadata.Identifier;
+import com.xellitix.commons.semver.metadata.IdentifierFactory;
 import com.xellitix.commons.semver.metadata.InvalidMetadataIdentifierException;
 import com.xellitix.commons.semver.metadata.InvalidMetadataIdentifierExceptionMatcher;
 import com.xellitix.commons.semver.metadata.Metadata;
@@ -32,6 +33,7 @@ public class DefaultSemanticVersionBuilderTest {
   private static final int MAJOR_VERSION = 5;
   private static final int MINOR_VERSION = 6;
   private static final int PATCH_VERSION = 11;
+  private static final String IDENTIFIER = "id1";
 
   // Rules
   @Rule
@@ -40,6 +42,8 @@ public class DefaultSemanticVersionBuilderTest {
   // Fixtures
   private Identifier identifierValid;
   private Identifier identifierInvalid;
+  private IdentifierFactory identifierFactory;
+
   private PreReleaseMetadataIdentifierValidator prIdentifierValidator;
   private BuildMetadataIdentifierValidator buildIdentifierValidator;
 
@@ -138,7 +142,7 @@ public class DefaultSemanticVersionBuilderTest {
 
   @Test
   public void clearPreReleaseMetadataIdentifiers__Test() {
-    versionBuilder.addPreReleaseMetadataIdentifier(identifierValid);
+    versionBuilder.addPreReleaseMetadataIdentifier(IDENTIFIER);
     versionBuilder.clearPreReleaseMetadata();
 
     assertThat(versionBuilder
@@ -155,7 +159,7 @@ public class DefaultSemanticVersionBuilderTest {
 
   @Test
   public void addBuildMetadataIdentifier__Test() {
-    versionBuilder.addBuildMetadataIdentifier(identifierValid);
+    versionBuilder.addBuildMetadataIdentifier(IDENTIFIER);
 
     assertThat(versionBuilder
         .build())
@@ -211,6 +215,10 @@ public class DefaultSemanticVersionBuilderTest {
     // Identifier mocking
     identifierValid = mock(Identifier.class);
     identifierInvalid = mock(Identifier.class);
+    identifierFactory = mock(IdentifierFactory.class);
+    doReturn(identifierValid)
+        .when(identifierFactory)
+        .create(eq(IDENTIFIER));
 
     // Identifier validator mocking
     prIdentifierValidator = mock(PreReleaseMetadataIdentifierValidator.class);
@@ -247,6 +255,7 @@ public class DefaultSemanticVersionBuilderTest {
         versionFactory,
         metadataFactory,
         prIdentifierValidator,
-        buildIdentifierValidator);
+        buildIdentifierValidator,
+        identifierFactory);
   }
 }

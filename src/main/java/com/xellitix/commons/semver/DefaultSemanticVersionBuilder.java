@@ -3,6 +3,7 @@ package com.xellitix.commons.semver;
 import com.google.inject.Inject;
 import com.xellitix.commons.semver.metadata.BuildMetadataIdentifierValidator;
 import com.xellitix.commons.semver.metadata.Identifier;
+import com.xellitix.commons.semver.metadata.IdentifierFactory;
 import com.xellitix.commons.semver.metadata.InvalidMetadataIdentifierException;
 import com.xellitix.commons.semver.metadata.Metadata;
 import com.xellitix.commons.semver.metadata.MetadataFactory;
@@ -29,6 +30,7 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
   private final MetadataFactory metadataFactory;
   private final PreReleaseMetadataIdentifierValidator preReleaseIdentifierValidator;
   private final BuildMetadataIdentifierValidator buildIdentifierValidator;
+  private final IdentifierFactory identifierFactory;
 
   /**
    * Constructor.
@@ -37,19 +39,22 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    * @param metadataFactory The {@link MetadataFactory}.
    * @param preReleaseIdentifierValidator The {@link PreReleaseMetadataIdentifierValidator}.
    * @param buildIdentifierValidator The {@link BuildMetadataIdentifierValidator}.
+   * @param identifierFactory The {@link IdentifierFactory}.
    */
   @Inject
   DefaultSemanticVersionBuilder(
       final SemanticVersionFactory versionFactory,
       final MetadataFactory metadataFactory,
       final PreReleaseMetadataIdentifierValidator preReleaseIdentifierValidator,
-      final BuildMetadataIdentifierValidator buildIdentifierValidator) {
+      final BuildMetadataIdentifierValidator buildIdentifierValidator,
+      final IdentifierFactory identifierFactory) {
 
     // Load dependencies
     this.versionFactory = versionFactory;
     this.metadataFactory = metadataFactory;
     this.preReleaseIdentifierValidator = preReleaseIdentifierValidator;
     this.buildIdentifierValidator = buildIdentifierValidator;
+    this.identifierFactory = identifierFactory;
 
     // Initial the version
     major = 0;
@@ -143,6 +148,17 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
   }
 
   /**
+   * Adds a pre-release {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   */
+  @Override
+  public SemanticVersionBuilder addPreReleaseMetadataIdentifier(final String identifier) {
+    return addPreReleaseMetadataIdentifier(identifierFactory.create(identifier));
+  }
+
+  /**
    * Clears the pre-release {@link Metadata}.
    *
    * @return The {@link SemanticVersionBuilder}.
@@ -168,6 +184,17 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
 
     buildIdentifiers.add(identifier);
     return this;
+  }
+
+  /**
+   * Adds a build {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   */
+  @Override
+  public SemanticVersionBuilder addBuildMetadataIdentifier(final String identifier) {
+    return addBuildMetadataIdentifier(identifierFactory.create(identifier));
   }
 
   /**
