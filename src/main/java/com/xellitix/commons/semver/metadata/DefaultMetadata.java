@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -221,6 +222,24 @@ public class DefaultMetadata implements Metadata {
   @Override
   public void forEach(Consumer<? super Identifier> action) {
     identifiers.forEach(action);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+
+    if (!(o instanceof Metadata)) {
+      return false;
+    }
+
+    return identifiers.equals(o);
+  }
+
+  @Override
+  public int hashCode() {
+    return identifiers.hashCode();
   }
 
   private int min(final int one, final int two) {

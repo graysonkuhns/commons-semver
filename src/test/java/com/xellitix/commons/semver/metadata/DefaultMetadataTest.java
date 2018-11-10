@@ -76,11 +76,48 @@ public class DefaultMetadataTest {
     // Create metadata
     DefaultMetadata metadata = new DefaultMetadata(Arrays.asList(a, b, c));
 
-    //
     assertThat(metadata
         .toString())
         .isNotNull()
         .isEqualTo(METADATA);
+  }
+
+  @Test
+  public void equalsReturnsTrue__WhenMetadataAreEqual__Test() {
+    DefaultMetadata metadata1 = new DefaultMetadata(Arrays.asList(a, b));
+    DefaultMetadata metadata2 = new DefaultMetadata(Arrays.asList(a, b));
+
+    assertThat(metadata1
+        .equals(metadata2))
+        .isTrue();
+  }
+
+  @Test
+  public void equalsReturnsFalse__WhenMetadataAreNotEqual__Test() {
+    DefaultMetadata metadata1 = new DefaultMetadata(Arrays.asList(a, b));
+    DefaultMetadata metadata2 = new DefaultMetadata(Arrays.asList(a, c));
+
+    assertThat(metadata1
+        .equals(metadata2))
+        .isFalse();
+  }
+
+  @Test
+  public void hashCodeIsEqual__WhenMetadataAreEqual__Test() {
+    DefaultMetadata metadata1 = new DefaultMetadata(Arrays.asList(a, b));
+    DefaultMetadata metadata2 = new DefaultMetadata(Arrays.asList(a, b));
+
+    assertThat(metadata1.hashCode())
+        .isEqualTo(metadata2.hashCode());
+  }
+
+  @Test
+  public void hashCodeIsDifferent__WhenMetadataAreNotEqual__Test() {
+    DefaultMetadata metadata1 = new DefaultMetadata(Arrays.asList(a, b));
+    DefaultMetadata metadata2 = new DefaultMetadata(Arrays.asList(a, c));
+
+    assertThat(metadata1.hashCode())
+        .isNotEqualTo(metadata2.hashCode());
   }
 
   @Before
