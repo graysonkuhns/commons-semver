@@ -22,7 +22,8 @@ import java.util.regex.Pattern;
 public class DefaultSemanticVersionParser implements SemanticVersionParser {
 
   // Constants
-  private static final String VERSION_REGEX = "^(\\d+)\\.(\\d+)\\.(\\d+)-?([^\\n\\+]*)?\\+?(.*)?.*$";
+  private static final String VERSION_REGEX =
+      "^(\\d+)\\.(\\d+)\\.(\\d+)-?([^\\n\\+]*)?\\+?(.*)?.*$";
 
   // Properties
   private final Pattern versionPattern;
@@ -90,8 +91,15 @@ public class DefaultSemanticVersionParser implements SemanticVersionParser {
     final String buildIdentifiers = matcher.group(5);
 
     // Parse metadata components
-    Metadata preReleaseMetadata = parseMetadata(preReleaseIdentifiers, version, preReleaseMetadataValidator);
-    Metadata buildMetadata = parseMetadata(buildIdentifiers, version, buildMetadataValidator);
+    Metadata preReleaseMetadata = parseMetadata(
+        preReleaseIdentifiers,
+        version,
+        preReleaseMetadataValidator);
+
+    Metadata buildMetadata = parseMetadata(
+        buildIdentifiers,
+        version,
+        buildMetadataValidator);
 
     // Create the version model
     return versionFactory.create(

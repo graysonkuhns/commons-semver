@@ -26,18 +26,18 @@ public class PreReleaseMetadataIdentifierValidator
    *
    * @param alphaNumHyphenIdentifierValidator The {@link AlphaNumHyphenIdentifierValidator}.
    * @param nonEmptyIdentifierValidator The {@link NonEmptyIdentifierValidator}.
-   * @param noLeadingZeroesOnDigitsIdentifierValidator The {@link NoLeadingZeroesOnDigitsIdentifierValidator}.
+   * @param noLeadingZeroesValidator The {@link NoLeadingZeroesOnDigitsIdentifierValidator}.
    */
   @Inject
   public PreReleaseMetadataIdentifierValidator(
       final AlphaNumHyphenIdentifierValidator alphaNumHyphenIdentifierValidator,
       final NonEmptyIdentifierValidator nonEmptyIdentifierValidator,
-      final NoLeadingZeroesOnDigitsIdentifierValidator noLeadingZeroesOnDigitsIdentifierValidator
+      final NoLeadingZeroesOnDigitsIdentifierValidator noLeadingZeroesValidator
   ) {
     super(ImmutableSet.of(
         alphaNumHyphenIdentifierValidator,
         nonEmptyIdentifierValidator,
-        noLeadingZeroesOnDigitsIdentifierValidator
+        noLeadingZeroesValidator
     ));
   }
 }

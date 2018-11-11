@@ -35,7 +35,7 @@ public class DefaultMetadata implements Metadata {
   @Override
   public int compareTo(final Metadata other) {
     // We will only compare identifiers to the max length of both identifier lists
-    int endIndex = min(size(), other.size());
+    int endIndex = Math.min(size(), other.size());
 
     // Compare available identifiers
     for (int i = 0; i < endIndex; i++) {
@@ -110,8 +110,18 @@ public class DefaultMetadata implements Metadata {
   }
 
   @Override
+  public void add(int i, Identifier identifier) {
+    identifiers.add(i, identifier);
+  }
+
+  @Override
   public boolean remove(final Object o) {
     return identifiers.remove(o);
+  }
+
+  @Override
+  public Identifier remove(int i) {
+    return identifiers.remove(i);
   }
 
   @Override
@@ -152,16 +162,6 @@ public class DefaultMetadata implements Metadata {
   @Override
   public Identifier set(int i, Identifier identifier) {
     return identifiers.set(i, identifier);
-  }
-
-  @Override
-  public void add(int i, Identifier identifier) {
-    identifiers.add(i, identifier);
-  }
-
-  @Override
-  public Identifier remove(int i) {
-    return identifiers.remove(i);
   }
 
   @Override
@@ -240,13 +240,5 @@ public class DefaultMetadata implements Metadata {
   @Override
   public int hashCode() {
     return identifiers.hashCode();
-  }
-
-  private int min(final int one, final int two) {
-    if (one < two) {
-      return one;
-    } else {
-      return two;
-    }
   }
 }

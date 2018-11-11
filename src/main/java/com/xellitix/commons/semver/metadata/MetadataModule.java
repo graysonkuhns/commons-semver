@@ -17,13 +17,13 @@ public class MetadataModule extends AbstractModule {
   protected void configure() {
     // Identifier factory
     install(new FactoryModuleBuilder()
-      .implement(Identifier.class, DefaultIdentifier.class)
-      .build(IdentifierFactory.class));
+        .implement(Identifier.class, DefaultIdentifier.class)
+        .build(IdentifierFactory.class));
 
     // Metadata factory
     install(new FactoryModuleBuilder()
-      .implement(Metadata.class, DefaultMetadata.class)
-      .build(MetadataFactory.class));
+        .implement(Metadata.class, DefaultMetadata.class)
+        .build(MetadataFactory.class));
 
     // Metadata parser
     bind(MetadataParser.class).to(DefaultMetadataParser.class);

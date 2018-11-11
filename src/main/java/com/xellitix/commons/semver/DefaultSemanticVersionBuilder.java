@@ -138,7 +138,10 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
    */
   @Override
-  public SemanticVersionBuilder addPreReleaseMetadataIdentifier(final Identifier identifier) throws InvalidMetadataIdentifierException {
+  public SemanticVersionBuilder addPreReleaseMetadataIdentifier(
+      final Identifier identifier)
+      throws InvalidMetadataIdentifierException {
+
     if (!preReleaseIdentifierValidator.isValid(identifier)) {
       throw new InvalidMetadataIdentifierException(identifier);
     }
@@ -152,9 +155,13 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    *
    * @param identifier The {@link Identifier}.
    * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
    */
   @Override
-  public SemanticVersionBuilder addPreReleaseMetadataIdentifier(final String identifier) {
+  public SemanticVersionBuilder addPreReleaseMetadataIdentifier(
+      final String identifier)
+      throws InvalidMetadataIdentifierException {
+
     return addPreReleaseMetadataIdentifier(identifierFactory.create(identifier));
   }
 
@@ -177,7 +184,10 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
    */
   @Override
-  public SemanticVersionBuilder addBuildMetadataIdentifier(final Identifier identifier) throws InvalidMetadataIdentifierException {
+  public SemanticVersionBuilder addBuildMetadataIdentifier(
+      final Identifier identifier)
+      throws InvalidMetadataIdentifierException {
+
     if (!buildIdentifierValidator.isValid(identifier)) {
       throw new InvalidMetadataIdentifierException(identifier);
     }
@@ -191,9 +201,13 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
    *
    * @param identifier The {@link Identifier}.
    * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
    */
   @Override
-  public SemanticVersionBuilder addBuildMetadataIdentifier(final String identifier) {
+  public SemanticVersionBuilder addBuildMetadataIdentifier(
+      final String identifier)
+      throws InvalidMetadataIdentifierException {
+
     return addBuildMetadataIdentifier(identifierFactory.create(identifier));
   }
 

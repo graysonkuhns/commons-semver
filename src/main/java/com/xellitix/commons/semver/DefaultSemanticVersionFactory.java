@@ -20,8 +20,17 @@ public class DefaultSemanticVersionFactory implements SemanticVersionFactory {
    * @return The {@link SemanticVersion}.
    */
   @Override
-  public SemanticVersion create(int major, int minor, int patch) {
-    return create(major, minor, patch, null, null);
+  public SemanticVersion create(
+      int major,
+      int minor,
+      int patch) {
+
+    return create(
+        major,
+        minor,
+        patch,
+        null,
+        null);
   }
 
   /**
@@ -34,8 +43,18 @@ public class DefaultSemanticVersionFactory implements SemanticVersionFactory {
    * @return The {@link SemanticVersion}.
    */
   @Override
-  public SemanticVersion create(int major, int minor, int patch, Metadata preReleaseMetadata) {
-    return create(major, minor, patch, preReleaseMetadata, null);
+  public SemanticVersion create(
+      int major,
+      int minor,
+      int patch,
+      Metadata preReleaseMetadata) {
+
+    return create(
+        major,
+        minor,
+        patch,
+        preReleaseMetadata,
+        null);
   }
 
   /**
@@ -49,7 +68,18 @@ public class DefaultSemanticVersionFactory implements SemanticVersionFactory {
    * @return The {@link SemanticVersion}.
    */
   @Override
-  public SemanticVersion create(int major, int minor, int patch, Metadata preReleaseMetadata, Metadata buildMetadata) {
-    return new DefaultSemanticVersion(major, minor, patch, preReleaseMetadata, buildMetadata);
+  public SemanticVersion create(
+      int major,
+      int minor,
+      int patch,
+      Metadata preReleaseMetadata,
+      Metadata buildMetadata) {
+
+    return new DefaultSemanticVersion(
+        major,
+        minor,
+        patch,
+        preReleaseMetadata,
+        buildMetadata);
   }
 }

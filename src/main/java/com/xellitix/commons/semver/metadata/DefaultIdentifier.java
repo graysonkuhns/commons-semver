@@ -71,7 +71,8 @@ public class DefaultIdentifier implements Identifier {
    * Compares against another {@link Identifier}.
    *
    * @param other The {@link Identifier} to compare against.
-   * @return A negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
+   * @return A negative integer, zero, or a positive integer as this object is
+   *     less than, equal to, or greater than the specified object.
    */
   @Override
   public int compareTo(final Identifier other) {

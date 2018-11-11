@@ -17,7 +17,10 @@ public interface SemanticVersionFactory {
    * @param patch The patch version.
    * @return The {@link SemanticVersion}.
    */
-  SemanticVersion create(int major, int minor, int patch);
+  SemanticVersion create(
+      int major,
+      int minor,
+      int patch);
 
   /**
    * Creates a {@link SemanticVersion}.
@@ -28,7 +31,11 @@ public interface SemanticVersionFactory {
    * @param preReleaseMetadata The pre-release {@link Metadata}.
    * @return The {@link SemanticVersion}.
    */
-  SemanticVersion create(int major, int minor, int patch, Metadata preReleaseMetadata);
+  SemanticVersion create(
+      int major,
+      int minor,
+      int patch,
+      Metadata preReleaseMetadata);
 
   /**
    * Creates a {@link SemanticVersion}.
@@ -40,5 +47,10 @@ public interface SemanticVersionFactory {
    * @param buildMetadata The build {@link Metadata}.
    * @return The {@link SemanticVersion}.
    */
-  SemanticVersion create(int major, int minor, int patch, Metadata preReleaseMetadata, Metadata buildMetadata);
+  SemanticVersion create(
+      int major,
+      int minor,
+      int patch,
+      Metadata preReleaseMetadata,
+      Metadata buildMetadata);
 }

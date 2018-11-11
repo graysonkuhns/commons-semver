@@ -19,7 +19,9 @@ public class PreReleaseMetadataValidator
    * @param identifierValidator The {@link PreReleaseMetadataIdentifierValidator}.
    */
   @Inject
-  public PreReleaseMetadataValidator(final PreReleaseMetadataIdentifierValidator identifierValidator) {
+  public PreReleaseMetadataValidator(
+      final PreReleaseMetadataIdentifierValidator identifierValidator) {
+
     super(identifierValidator);
   }
 }

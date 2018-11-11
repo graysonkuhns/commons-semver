@@ -163,9 +163,9 @@ public class DefaultSemanticVersion implements SemanticVersion {
     } else if (preReleaseMetadata != null && !otherPrm.isPresent()) {
       return false;
     } else if (
-        preReleaseMetadata != null &&
-        otherPrm.isPresent() &&
-        !preReleaseMetadata.equals(otherPrm.get())) {
+        preReleaseMetadata != null
+        && otherPrm.isPresent()
+        && !preReleaseMetadata.equals(otherPrm.get())) {
 
       return false;
     }
