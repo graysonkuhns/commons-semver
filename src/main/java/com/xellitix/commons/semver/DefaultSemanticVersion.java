@@ -1,6 +1,7 @@
 package com.xellitix.commons.semver;
 
 import com.xellitix.commons.semver.metadata.Metadata;
+import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
 
@@ -98,6 +99,108 @@ public class DefaultSemanticVersion implements SemanticVersion {
    */
   @Override
   public String toString() {
-    return String.format("%d.%d.%d", major, minor, patch);
+    final StringBuilder version = new StringBuilder();
+
+    version.append(major);
+    version.append('.');
+
+    version.append(minor);
+    version.append('.');
+
+    version.append(patch);
+
+    if (preReleaseMetadata != null) {
+      version.append('-');
+      version.append(preReleaseMetadata.toString());
+    }
+
+    if (buildMetadata != null) {
+      version.append('+');
+      version.append(buildMetadata.toString());
+    }
+
+    return version.toString();
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+
+    if (!(o instanceof SemanticVersion)) {
+      return false;
+    }
+    SemanticVersion other = (SemanticVersion) o;
+
+    // Compare pre-release metadata
+    Optional<Metadata> otherPrm = other.getPreReleaseMetadata();
+
+    if (preReleaseMetadata == null && otherPrm.isPresent()) {
+      return false;
+    } else if (preReleaseMetadata != null && !otherPrm.isPresent()) {
+      return false;
+    } else if (
+        preReleaseMetadata != null &&
+        otherPrm.isPresent() &&
+        !preReleaseMetadata.equals(otherPrm.get())) {
+
+      return false;
+    }
+
+    // Compare primary version components
+    return (
+        major == other.getMajorVersion()
+        && minor == other.getMinorVersion()
+        && patch == other.getPatchVersion()
+        );
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(major, minor, patch, preReleaseMetadata);
+  }
+
+  @Override
+  public int compareTo(final SemanticVersion other) {
+    // Major
+    if (major < other.getMajorVersion()) {
+      return -1;
+    }
+
+    if (major > other.getMajorVersion()) {
+      return 1;
+    }
+
+    // Minor
+    if (minor < other.getMinorVersion()) {
+      return -1;
+    }
+
+    if (minor > other.getMinorVersion()) {
+      return 1;
+    }
+
+    // Patch
+    if (patch < other.getPatchVersion()) {
+      return -1;
+    }
+
+    if (patch > other.getPatchVersion()) {
+      return 1;
+    }
+
+    // Pre-release metadata
+    final Optional<Metadata> otherPrm = other.getPreReleaseMetadata();
+
+    if (preReleaseMetadata != null && !otherPrm.isPresent()) {
+      return -1;
+    }
+
+    if (preReleaseMetadata == null && otherPrm.isPresent()) {
+      return 1;
+    }
+
+    return preReleaseMetadata.compareTo(otherPrm.get());
   }
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
  *
  * @author Grayson Kuhns
  */
-public interface SemanticVersion extends Serializable {
+public interface SemanticVersion extends Comparable<SemanticVersion>,Serializable {
 
   /**
    * Gets the major version.
