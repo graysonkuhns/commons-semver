@@ -1,6 +1,7 @@
 package com.xellitix.commons.semver.metadata;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
  *
  * @author Grayson Kuhns
  */
+@Singleton
 public class DefaultMetadataParser implements MetadataParser {
 
   // Dependencies

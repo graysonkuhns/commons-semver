@@ -1,6 +1,7 @@
 package com.xellitix.commons.semver;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.xellitix.commons.semver.metadata.BuildMetadataIdentifierValidator;
 import com.xellitix.commons.semver.metadata.BuildMetadataValidator;
 import com.xellitix.commons.semver.metadata.Metadata;
@@ -17,6 +18,7 @@ import java.util.regex.Pattern;
  *
  * @author Grayson Kuhns
  */
+@Singleton
 public class DefaultSemanticVersionParser implements SemanticVersionParser {
 
   // Constants

@@ -2,6 +2,7 @@ package com.xellitix.commons.semver.metadata;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Pre-release {@link Metadata} {@link Identifier} validator.
@@ -15,6 +16,7 @@ import com.google.inject.Inject;
  *
  * @author Grayson Kuhns
  */
+@Singleton
 public class PreReleaseMetadataIdentifierValidator
     extends AggregateIdentifierValidator
     implements IdentifierValidator {
