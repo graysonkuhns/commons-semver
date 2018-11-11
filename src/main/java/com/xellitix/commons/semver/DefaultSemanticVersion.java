@@ -93,6 +93,28 @@ public class DefaultSemanticVersion implements SemanticVersion {
   }
 
   /**
+   * Checks if this {@link SemanticVersion} is greater than another.
+   *
+   * @param other The other {@link SemanticVersion}.
+   * @return True if this {@link SemanticVersion} is greater.
+   */
+  @Override
+  public boolean isGreaterThan(final SemanticVersion other) {
+    return compareTo(other) > 0;
+  }
+
+  /**
+   * Checks if this {@link SemanticVersion} is greater than another.
+   *
+   * @param other The other {@link SemanticVersion}.
+   * @return True if this {@link SemanticVersion} is greater.
+   */
+  @Override
+  public boolean isLessThan(final SemanticVersion other) {
+    return compareTo(other) < 0;
+  }
+
+  /**
    * Gets the string representation.
    *
    * @return The string representation.

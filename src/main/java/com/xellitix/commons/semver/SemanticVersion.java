@@ -45,4 +45,20 @@ public interface SemanticVersion extends Comparable<SemanticVersion>,Serializabl
    * @return An {@link Optional} containing the build {@link Metadata}.
    */
   Optional<Metadata> getBuildMetadata();
+
+  /**
+   * Checks if this {@link SemanticVersion} is greater than another.
+   *
+   * @param other The other {@link SemanticVersion}.
+   * @return True if this {@link SemanticVersion} is greater.
+   */
+  boolean isGreaterThan(final SemanticVersion other);
+
+  /**
+   * Checks if this {@link SemanticVersion} is greater than another.
+   *
+   * @param other The other {@link SemanticVersion}.
+   * @return True if this {@link SemanticVersion} is greater.
+   */
+  boolean isLessThan(final SemanticVersion other);
 }

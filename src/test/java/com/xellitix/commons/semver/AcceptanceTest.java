@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,57 +14,14 @@ import org.junit.Test;
  */
 public class AcceptanceTest {
 
-  // Constants
-  private static final String VERSION_1 = "1.0.0-alpha";
-  private static final String VERSION_2 = "1.0.0-alpha.1";
-  private static final String VERSION_3 = "1.0.0-alpha.beta";
-  private static final String VERSION_4 = "1.0.0-beta";
-  private static final String VERSION_5 = "1.0.0-beta.2";
-  private static final String VERSION_6 = "1.0.0-beta.11";
-  private static final String VERSION_7 = "1.0.0-rc.1";
-  private static final String VERSION_8 = "1.0.0.";
-
   // Fixtures
   private Injector injector;
-  SemanticVersionParser parser;
-
-  private SemanticVersion version1;
-  private SemanticVersion version2;
-  private SemanticVersion version3;
-  private SemanticVersion version4;
-  private SemanticVersion version5;
-  private SemanticVersion version6;
-  private SemanticVersion version7;
-  private SemanticVersion version8;
-
-  /*
-  @Test
-  public void versionEquality__Test() {
-    SemanticVersion a = parser.parse("1.0.0-rc.1");
-    SemanticVersion b = injector
-        .getInstance(SemanticVersionBuilder.class)
-        .setMajorVersion(1)
-        .addPreReleaseMetadataIdentifier("rc")
-        .addPreReleaseMetadataIdentifier("1")
-        .build();
-
-    assertThat(a).isEqualTo(b);
-  }
-  */
+  private SemanticVersionParser parser;
 
   @Test
-  public void validVersionsAreParsedCorrectly__Test() {
-    assertThatVersionIs100(version1);
-    assertThatVersionIs100(version2);
-    assertThatVersionIs100(version3);
-    assertThatVersionIs100(version4);
-    assertThatVersionIs100(version5);
-    assertThatVersionIs100(version6);
-    assertThatVersionIs100(version7);
-    assertThatVersionIs100(version8);
-  }
+  public void parseVersion__Test() {
+    SemanticVersion version = parser.parse("1.0.0-rc.1+x86-64.2");
 
-  private void assertThatVersionIs100(final SemanticVersion version) {
     assertThat(version
         .getMajorVersion())
         .isEqualTo(1);
@@ -75,24 +31,77 @@ public class AcceptanceTest {
     assertThat(version
         .getPatchVersion())
         .isEqualTo(0);
+
+    assertThat(version
+        .getPreReleaseMetadata()
+        .get()
+        .toString())
+        .isEqualTo("rc.1");
+
+    assertThat(version
+        .getBuildMetadata()
+        .get()
+        .toString())
+        .isEqualTo("x86-64.2");
+  }
+
+  @Test
+  public void versionEquality__Test() {
+    // Parse version
+    SemanticVersion a = parser.parse("1.0.0-rc.1+x86-64.2");
+
+    // Build version
+    SemanticVersion b = injector
+        .getInstance(SemanticVersionBuilder.class)
+        .setMajorVersion(1)
+        .addPreReleaseMetadataIdentifier("rc")
+        .addPreReleaseMetadataIdentifier("1")
+        .addBuildMetadataIdentifier("arm32")
+        .addBuildMetadataIdentifier("54")
+        .build();
+
+    assertThat(a).isEqualTo(b);
+  }
+
+  @Test
+  public void precedence__WithoutMetadata__Test() {
+    SemanticVersion a = parser.parse("1.0.0");
+    SemanticVersion b = parser.parse("2.0.0");
+    SemanticVersion c = parser.parse("2.1.0");
+    SemanticVersion d = parser.parse("2.1.1");
+
+    assertThat(a.isLessThan(b)).isTrue();
+    assertThat(b.isLessThan(c)).isTrue();
+    assertThat(c.isLessThan(d)).isTrue();
+  }
+
+  @Test
+  public void precedence__WithMetadata__Test() {
+    SemanticVersion a = parser.parse("1.0.0-alpha");
+    SemanticVersion b = parser.parse("1.0.0-alpha.1");
+    SemanticVersion c = parser.parse("1.0.0-alpha.beta");
+    SemanticVersion d = parser.parse("1.0.0-beta");
+    SemanticVersion e = parser.parse("1.0.0-beta.2");
+    SemanticVersion f = parser.parse("1.0.0-beta.11");
+    SemanticVersion g = parser.parse("1.0.0-rc.1");
+    SemanticVersion h = parser.parse("1.0.0");
+
+    assertThat(a.isLessThan(b)).isTrue();
+    assertThat(b.isLessThan(c)).isTrue();
+    assertThat(c.isLessThan(d)).isTrue();
+    assertThat(d.isLessThan(e)).isTrue();
+    assertThat(e.isLessThan(f)).isTrue();
+    assertThat(f.isLessThan(g)).isTrue();
+    assertThat(g.isLessThan(h)).isTrue();
   }
 
   @Before
   public void setUp() {
     // Create the Guice injector
+    // Create the Guice injector
     injector = Guice.createInjector(new SemanticVersionModule());
 
     // Create the version parser
     parser = injector.getInstance(SemanticVersionParser.class);
-
-    // Parse the versions
-    version1 = parser.parse(VERSION_1);
-    version2 = parser.parse(VERSION_2);
-    version3 = parser.parse(VERSION_3);
-    version4 = parser.parse(VERSION_4);
-    version5 = parser.parse(VERSION_5);
-    version6 = parser.parse(VERSION_6);
-    version7 = parser.parse(VERSION_7);
-    version8 = parser.parse(VERSION_8);
   }
 }
