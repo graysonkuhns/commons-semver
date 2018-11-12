@@ -3,7 +3,7 @@ package com.xellitix.commons.semver;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyList;
+import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -241,7 +241,7 @@ public class DefaultSemanticVersionBuilderTest {
     metadataFactory = mock(MetadataFactory.class);
     doReturn(metadata)
         .when(metadataFactory)
-        .create(anyList());
+        .create(anyListOf(Identifier.class));
 
     // Version factory mocking
     version = mock(SemanticVersion.class);

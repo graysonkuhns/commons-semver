@@ -13,14 +13,17 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.runners.MockitoJUnitRunner;
 
 /**
  * {@link DefaultMetadataParser} test case.
  *
  * @author Grayson Kuhns
  */
+@RunWith(MockitoJUnitRunner.class)
 public class DefaultMetadataParserTest {
 
   // Constants
@@ -30,7 +33,7 @@ public class DefaultMetadataParserTest {
 
   // Captors
   @Captor
-  public ArgumentCaptor<List> identifiersCaptor = ArgumentCaptor.forClass(List.class);
+  public ArgumentCaptor<List<Identifier>> identifiersCaptor;
 
   // Fixtures
   private Identifier idA;
