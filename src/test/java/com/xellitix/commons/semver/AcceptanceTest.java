@@ -55,9 +55,9 @@ public class AcceptanceTest {
         .getInstance(SemanticVersionBuilder.class)
         .setMajorVersion(1)
         .addPreReleaseMetadataIdentifier("rc")
-        .addPreReleaseMetadataIdentifier("1")
+        .addPreReleaseMetadataIdentifier(1)
         .addBuildMetadataIdentifier("arm32")
-        .addBuildMetadataIdentifier("54")
+        .addBuildMetadataIdentifier(54L)
         .build();
 
     assertThat(a).isEqualTo(b);
@@ -97,7 +97,6 @@ public class AcceptanceTest {
 
   @Before
   public void setUp() {
-    // Create the Guice injector
     // Create the Guice injector
     injector = Guice.createInjector(new SemanticVersionModule());
 
