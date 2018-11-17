@@ -181,7 +181,7 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
       final Integer identifier)
       throws InvalidMetadataIdentifierException {
 
-    return addPreReleaseMetadataIdentifier(identifier.toString());
+    return addPreReleaseMetadataIdentifier(identifierFactory.create(identifier));
   }
 
   /**
@@ -196,7 +196,7 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
       final Long identifier)
       throws InvalidMetadataIdentifierException {
 
-    return addPreReleaseMetadataIdentifier(identifier.toString());
+    return addPreReleaseMetadataIdentifier(identifierFactory.create(identifier));
   }
 
   /**
@@ -261,7 +261,7 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
       final Integer identifier)
       throws InvalidMetadataIdentifierException {
 
-    return addBuildMetadataIdentifier(identifier.toString());
+    return addBuildMetadataIdentifier(identifierFactory.create(identifier));
   }
 
   /**
@@ -276,7 +276,7 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
       final Long identifier)
       throws InvalidMetadataIdentifierException {
 
-    return addBuildMetadataIdentifier(identifier.toString());
+    return addBuildMetadataIdentifier(identifierFactory.create(identifier));
   }
 
   /**

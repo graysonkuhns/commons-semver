@@ -21,8 +21,7 @@ public class DefaultIdentifier implements Identifier {
    *
    * @param value The value.
    */
-  @Inject
-  DefaultIdentifier(@Assisted final String value) {
+  DefaultIdentifier(final String value) {
     this.value = value;
 
     // Determine if the value is numeric
@@ -35,6 +34,26 @@ public class DefaultIdentifier implements Identifier {
     }
 
     this.isNumeric = !nonDigitFound;
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param value The value.
+   */
+  DefaultIdentifier(final Integer value) {
+    this.value = value.toString();
+    this.isNumeric = true;
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param value The value.
+   */
+  DefaultIdentifier(final Long value) {
+    this.value = value.toString();
+    this.isNumeric = true;
   }
 
   /**
