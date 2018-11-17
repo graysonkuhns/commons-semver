@@ -97,7 +97,7 @@ public class AcceptanceTest {
 
   @Before
   public void setUp() {
-    // Create the Guice injector
+    // Create the Google Guice injector
     injector = Guice.createInjector(new SemanticVersionModule());
 
     // Create the version parser
