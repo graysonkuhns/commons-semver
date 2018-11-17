@@ -8,7 +8,7 @@ Alpha
 
 ## Usage
 
-Parsing semantic versions
+Parsing a Semantic Version
 ``` java
 // Create the Google Guice injector
 Injector injector = Guice.createInjector(new SemanticVersionModule());
@@ -16,7 +16,7 @@ Injector injector = Guice.createInjector(new SemanticVersionModule());
 // Create the version parser
 SemanticVersionParser parser = injector.getInstance(SemanticVersionParser.class);
 
-// Parse a version
+// Parse the version
 SemanticVersion version = parser.parse("1.0.0-rc.1+x86-64.2");
 
 // Get the version properties
@@ -25,6 +25,27 @@ version.getMinorVersion()       // int                : 0
 version.getPatchVersion()       // int                : 0
 version.getPreReleaseMetadata() // Optional<Metadata> : "rc.1"
 version.getBuildMetadata()      // Optional<Metadata> : "x86-64.2"
+```
+
+Building a Semantic Version
+``` java
+// Create the Google Guice injector
+Injector injector = Guice.createInjector(new SemanticVersionModule());
+
+// Create the version builder
+SemanticVersionBuilder builder = injector.getInstance(SemanticVersionBuilder.class);
+
+// Build the Semantic Version
+SemanticVersion version = builder
+    .setMajorVersion(1)
+    .addPreReleaseMetadataIdentifier("rc")
+    .addPreReleaseMetadataIdentifier(1)
+    .addBuildMetadataIdentifier("arm32")
+    .addBuildMetadataIdentifier(54L)
+    .build();
+
+// Get the string representation of the version
+version.toString(); // "1.0.0-rc.1+arm32.54";
 ```
 
 ## Style
