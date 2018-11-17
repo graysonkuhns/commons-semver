@@ -2,10 +2,6 @@
 
 Semantic versioning Java library.
 
-## Status
-
-Alpha
-
 ## Usage
 
 Parsing a Semantic Version
