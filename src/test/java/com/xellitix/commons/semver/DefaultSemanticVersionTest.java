@@ -37,6 +37,7 @@ public class DefaultSemanticVersionTest {
   private DefaultSemanticVersion versionWithBuildMetadata;
   private DefaultSemanticVersion versionWithMetadata;
   private DefaultSemanticVersion versionWithoutMetadata;
+  private DefaultSemanticVersion versionInitialDevelopment;
 
   // #toString
   @Test
@@ -141,6 +142,36 @@ public class DefaultSemanticVersionTest {
         .isFalse();
   }
 
+  // #isPreRelease
+  @Test
+  public void isPreReleaseReturnsFalse__WhenVersionDoesNotHavePreReleaseMetadata__Test() {
+    assertThat(versionWithoutMetadata
+        .isPreRelease())
+        .isFalse();
+  }
+
+  @Test
+  public void isPreReleaseReturnsTrue__WhenVersionHasPreReleaseMetadata__Test() {
+    assertThat(versionWithPreReleaseMetadata
+        .isPreRelease())
+        .isTrue();
+  }
+
+  // #hasStableApi
+  @Test
+  public void hasStableApiReturnsTrue__WhenMajorVersionIsGreaterThanZero__Test() {
+    assertThat(versionWithoutMetadata
+        .hasStableApi())
+        .isTrue();
+  }
+
+  @Test
+  public void hasStableApiReturnsFalse__WhenMajorVersionIsLessThanOne__Test() {
+    assertThat(versionInitialDevelopment
+        .hasStableApi())
+        .isFalse();
+  }
+
   @Before
   public void setUp() {
     // Mock the metadata
@@ -159,5 +190,6 @@ public class DefaultSemanticVersionTest {
     versionWithBuildMetadata = new DefaultSemanticVersion(MAJOR, MINOR, PATCH, null, buildMetadata);
     versionWithMetadata = new DefaultSemanticVersion(MAJOR, MINOR, PATCH, preReleaseMetadata, buildMetadata);
     versionWithoutMetadata = new DefaultSemanticVersion(MAJOR, MINOR, PATCH, null, null);
+    versionInitialDevelopment = new DefaultSemanticVersion(0, 1, 0, null, null);
   }
 }

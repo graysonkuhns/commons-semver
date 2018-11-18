@@ -47,6 +47,24 @@ public interface SemanticVersion extends Comparable<SemanticVersion>,Serializabl
   Optional<Metadata> getBuildMetadata();
 
   /**
+   * Checks if the {@link SemanticVersion} is a pre-release.
+   *
+   * @return True if the {@link SemanticVersion} is a pre-release.
+   */
+  boolean isPreRelease();
+
+  /**
+   * Checks if the software associated with the {@link SemanticVersion} has a stable API.
+   *
+   * <p>
+   *   The API is considered stable if the major version is non-zero.
+   * </p>
+   *
+   * @return True if the API is stable.
+   */
+  boolean hasStableApi();
+
+  /**
    * Checks if this {@link SemanticVersion} is greater than another.
    *
    * @param other The other {@link SemanticVersion}.

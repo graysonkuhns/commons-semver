@@ -1,6 +1,7 @@
 package com.xellitix.commons.semver;
 
 import com.xellitix.commons.semver.metadata.Identifier;
+import com.xellitix.commons.semver.metadata.InvalidMetadataIdentifierException;
 import com.xellitix.commons.semver.metadata.Metadata;
 
 /**
@@ -55,21 +56,45 @@ public interface SemanticVersionBuilder {
    */
   int getPatchVersion();
 
-  /**
-   * Adds a pre-release {@link Metadata} {@link Identifier}.
-   *
-   * @param identifier The {@link Identifier}.
-   * @return The {@link SemanticVersionBuilder}.
-   */
-  SemanticVersionBuilder addPreReleaseMetadataIdentifier(Identifier identifier);
+  // --------------------------------------------------------------------------------------
+  // Pre-release metadata functionality
+  // --------------------------------------------------------------------------------------
 
   /**
    * Adds a pre-release {@link Metadata} {@link Identifier}.
    *
    * @param identifier The {@link Identifier}.
    * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
    */
-  SemanticVersionBuilder addPreReleaseMetadataIdentifier(String identifier);
+  SemanticVersionBuilder addPreReleaseMetadataIdentifier(Identifier identifier) throws InvalidMetadataIdentifierException;
+
+  /**
+   * Adds a pre-release {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
+   */
+  SemanticVersionBuilder addPreReleaseMetadataIdentifier(String identifier) throws InvalidMetadataIdentifierException;
+
+  /**
+   * Adds a pre-release {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
+   */
+  SemanticVersionBuilder addPreReleaseMetadataIdentifier(Integer identifier) throws InvalidMetadataIdentifierException;
+
+  /**
+   * Adds a pre-release {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
+   */
+  SemanticVersionBuilder addPreReleaseMetadataIdentifier(Long identifier) throws InvalidMetadataIdentifierException;
 
   /**
    * Clears the pre-release {@link Metadata}.
@@ -78,21 +103,45 @@ public interface SemanticVersionBuilder {
    */
   SemanticVersionBuilder clearPreReleaseMetadata();
 
-  /**
-   * Adds a build {@link Metadata} {@link Identifier}.
-   *
-   * @param identifier The {@link Identifier}.
-   * @return The {@link SemanticVersionBuilder}.
-   */
-  SemanticVersionBuilder addBuildMetadataIdentifier(Identifier identifier);
+  // --------------------------------------------------------------------------------------
+  // Build metadata functionality
+  // --------------------------------------------------------------------------------------
 
   /**
    * Adds a build {@link Metadata} {@link Identifier}.
    *
    * @param identifier The {@link Identifier}.
    * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
    */
-  SemanticVersionBuilder addBuildMetadataIdentifier(String identifier);
+  SemanticVersionBuilder addBuildMetadataIdentifier(Identifier identifier) throws InvalidMetadataIdentifierException;
+
+  /**
+   * Adds a build {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
+   */
+  SemanticVersionBuilder addBuildMetadataIdentifier(String identifier) throws InvalidMetadataIdentifierException;
+
+  /**
+   * Adds a build {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
+   */
+  SemanticVersionBuilder addBuildMetadataIdentifier(Integer identifier) throws InvalidMetadataIdentifierException;
+
+  /**
+   * Adds a build {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
+   */
+  SemanticVersionBuilder addBuildMetadataIdentifier(Long identifier) throws InvalidMetadataIdentifierException;
 
   /**
    * Clears the build {@link Metadata}.

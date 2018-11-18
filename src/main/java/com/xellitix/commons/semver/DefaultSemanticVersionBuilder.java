@@ -130,6 +130,10 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
     return patch;
   }
 
+  // --------------------------------------------------------------------------------------
+  // Pre-release metadata functionality
+  // --------------------------------------------------------------------------------------
+
   /**
    * Adds a pre-release {@link Metadata} {@link Identifier}.
    *
@@ -166,6 +170,36 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
   }
 
   /**
+   * Adds a pre-release {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
+   */
+  @Override
+  public SemanticVersionBuilder addPreReleaseMetadataIdentifier(
+      final Integer identifier)
+      throws InvalidMetadataIdentifierException {
+
+    return addPreReleaseMetadataIdentifier(identifierFactory.create(identifier));
+  }
+
+  /**
+   * Adds a pre-release {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
+   */
+  @Override
+  public SemanticVersionBuilder addPreReleaseMetadataIdentifier(
+      final Long identifier)
+      throws InvalidMetadataIdentifierException {
+
+    return addPreReleaseMetadataIdentifier(identifierFactory.create(identifier));
+  }
+
+  /**
    * Clears the pre-release {@link Metadata}.
    *
    * @return The {@link SemanticVersionBuilder}.
@@ -175,6 +209,10 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
     preReleaseIdentifiers.clear();
     return this;
   }
+
+  // --------------------------------------------------------------------------------------
+  // Build metadata functionality
+  // --------------------------------------------------------------------------------------
 
   /**
    * Adds a build {@link Metadata} {@link Identifier}.
@@ -206,6 +244,36 @@ public class DefaultSemanticVersionBuilder implements SemanticVersionBuilder {
   @Override
   public SemanticVersionBuilder addBuildMetadataIdentifier(
       final String identifier)
+      throws InvalidMetadataIdentifierException {
+
+    return addBuildMetadataIdentifier(identifierFactory.create(identifier));
+  }
+
+  /**
+   * Adds a build {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
+   */
+  @Override
+  public SemanticVersionBuilder addBuildMetadataIdentifier(
+      final Integer identifier)
+      throws InvalidMetadataIdentifierException {
+
+    return addBuildMetadataIdentifier(identifierFactory.create(identifier));
+  }
+
+  /**
+   * Adds a build {@link Metadata} {@link Identifier}.
+   *
+   * @param identifier The {@link Identifier}.
+   * @return The {@link SemanticVersionBuilder}.
+   * @throws InvalidMetadataIdentifierException If the {@link Identifier} is invalid.
+   */
+  @Override
+  public SemanticVersionBuilder addBuildMetadataIdentifier(
+      final Long identifier)
       throws InvalidMetadataIdentifierException {
 
     return addBuildMetadataIdentifier(identifierFactory.create(identifier));
