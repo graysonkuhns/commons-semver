@@ -141,6 +141,21 @@ public class DefaultSemanticVersionTest {
         .isFalse();
   }
 
+  // #isPreRelease
+  @Test
+  public void isPreReleaseReturnsFalse__WhenVersionDoesNotHavePreReleaseMetadata__Test() {
+    assertThat(versionWithoutMetadata
+        .isPreRelease())
+        .isFalse();
+  }
+
+  @Test
+  public void isPreReleaseReturnsTrue__WhenVersionHasPreReleaseMetadata__Test() {
+    assertThat(versionWithPreReleaseMetadata
+        .isPreRelease())
+        .isTrue();
+  }
+
   @Before
   public void setUp() {
     // Mock the metadata

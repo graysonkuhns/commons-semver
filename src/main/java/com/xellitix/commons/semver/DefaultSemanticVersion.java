@@ -93,6 +93,16 @@ public class DefaultSemanticVersion implements SemanticVersion {
   }
 
   /**
+   * Checks if the {@link SemanticVersion} is a pre-release.
+   *
+   * @return True if the {@link SemanticVersion} is a pre-release.
+   */
+  @Override
+  public boolean isPreRelease() {
+    return preReleaseMetadata != null;
+  }
+
+  /**
    * Checks if this {@link SemanticVersion} is greater than another.
    *
    * @param other The other {@link SemanticVersion}.

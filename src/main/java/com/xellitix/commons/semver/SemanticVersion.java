@@ -47,6 +47,13 @@ public interface SemanticVersion extends Comparable<SemanticVersion>,Serializabl
   Optional<Metadata> getBuildMetadata();
 
   /**
+   * Checks if the {@link SemanticVersion} is a pre-release.
+   *
+   * @return True if the {@link SemanticVersion} is a pre-release.
+   */
+  boolean isPreRelease();
+
+  /**
    * Checks if this {@link SemanticVersion} is greater than another.
    *
    * @param other The other {@link SemanticVersion}.
