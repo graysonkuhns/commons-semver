@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>semver</artifactId>
-    <version>0.6.0</version>
+    <version>0.7.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>XELLITIX Commons - Semantic Versioning</name>
     <description>Semantic Versioning Models and Utilities</description>
