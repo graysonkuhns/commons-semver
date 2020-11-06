@@ -8,11 +8,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
- * {@link DefaultIdentifierFactory} test case.
+ * {@link IdentifierFactory} test case.
  *
  * @author Grayson Kuhns
  */
-public class DefaultIdentifierFactoryTest {
+public class IdentifierFactoryTest {
 
   // Constants
   private static final String STR_VALUE = "5";
@@ -25,7 +25,7 @@ public class DefaultIdentifierFactoryTest {
   public ExpectedException thrown = ExpectedException.none();
 
   // Fixtures
-  private DefaultIdentifierFactory factory;
+  private IdentifierFactory factory;
 
   @Test
   public void createFromString__Test() {
@@ -69,38 +69,8 @@ public class DefaultIdentifierFactoryTest {
         .isTrue();
   }
 
-  @Test
-  public void createFromStringThrowsException__WhenInputIsNull__Test() {
-    // Describe the exception to expect
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage(NULL_MSG);
-
-    // Attempt to create an identifier using a null value
-    factory.create((String) null);
-  }
-
-  @Test
-  public void createFromIntThrowsException__WhenInputIsNull__Test() {
-    // Describe the exception to expect
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage(NULL_MSG);
-
-    // Attempt to create an identifier using a null value
-    factory.create((Integer) null);
-  }
-
-  @Test
-  public void createFromLongThrowsException__WhenInputIsNull__Test() {
-    // Describe the exception to expect
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage(NULL_MSG);
-
-    // Attempt to create an identifier using a null value
-    factory.create((Long) null);
-  }
-
   @Before
   public void setUp() {
-    factory = new DefaultIdentifierFactory();
+    factory = new IdentifierFactory();
   }
 }
