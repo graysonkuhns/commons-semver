@@ -5,17 +5,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 /**
- * {@link DefaultIdentifier} test case.
+ * {@link Identifier} test case.
  *
  * @author Grayson Kuhns
  */
-public class DefaultIdentifierTest {
+public class IdentifierTest {
 
   // #compareTo
   @Test
   public void numericIsLesserThanAlphanumeric__Test() {
-    DefaultIdentifier numeric = new DefaultIdentifier("2316518");
-    DefaultIdentifier alphaNum = new DefaultIdentifier("6gf5d98yt");
+    Identifier numeric = new Identifier("2316518");
+    Identifier alphaNum = new Identifier("6gf5d98yt");
 
     assertThat(numeric
         .compareTo(alphaNum))
@@ -28,8 +28,8 @@ public class DefaultIdentifierTest {
 
   @Test
   public void smallNumberIsLesserThanBigNumberTest__Test() {
-    DefaultIdentifier small = new DefaultIdentifier("54");
-    DefaultIdentifier big = new DefaultIdentifier("324356846512318643213215");
+    Identifier small = new Identifier("54");
+    Identifier big = new Identifier("324356846512318643213215");
 
     assertThat(small
         .compareTo(big))
@@ -42,8 +42,8 @@ public class DefaultIdentifierTest {
 
   @Test
   public void equalNumbersAreEqual__Test() {
-    DefaultIdentifier num1 = new DefaultIdentifier("42");
-    DefaultIdentifier num2 = new DefaultIdentifier("42");
+    Identifier num1 = new Identifier("42");
+    Identifier num2 = new Identifier("42");
 
     assertThat(num1
         .compareTo(num2))
@@ -52,8 +52,8 @@ public class DefaultIdentifierTest {
 
   @Test
   public void equalAlphanumericStringsAreEqual__Test() {
-    DefaultIdentifier alpha1 = new DefaultIdentifier("alpha");
-    DefaultIdentifier alpha2 = new DefaultIdentifier("alpha");
+    Identifier alpha1 = new Identifier("alpha");
+    Identifier alpha2 = new Identifier("alpha");
 
     assertThat(alpha1
         .compareTo(alpha2))
@@ -62,8 +62,8 @@ public class DefaultIdentifierTest {
 
   @Test
   public void alphaIsLesserThanBeta__Test() {
-    DefaultIdentifier alpha = new DefaultIdentifier("alpha");
-    DefaultIdentifier beta = new DefaultIdentifier("beta");
+    Identifier alpha = new Identifier("alpha");
+    Identifier beta = new Identifier("beta");
 
     assertThat(alpha
         .compareTo(beta))
@@ -77,7 +77,7 @@ public class DefaultIdentifierTest {
   // #isNumeric
   @Test
   public void isNumericReturnsTrue__WhenValueIsNumeric__Test() {
-    DefaultIdentifier id = new DefaultIdentifier("35168765123");
+    Identifier id = new Identifier("35168765123");
 
     assertThat(id
         .isNumeric())
@@ -86,7 +86,7 @@ public class DefaultIdentifierTest {
 
   @Test
   public void isNumericReturnsFalse__WhenValueIsAlphabetical__Test() {
-    DefaultIdentifier id = new DefaultIdentifier("fooBar");
+    Identifier id = new Identifier("fooBar");
 
     assertThat(id
         .isNumeric())
@@ -95,7 +95,7 @@ public class DefaultIdentifierTest {
 
   @Test
   public void isNumericReturnsFalse__WhenValueIsAlphanumeric__Test() {
-    DefaultIdentifier id = new DefaultIdentifier("36fooBar42whatIsLife");
+    Identifier id = new Identifier("36fooBar42whatIsLife");
 
     assertThat(id
         .isNumeric())
@@ -105,7 +105,7 @@ public class DefaultIdentifierTest {
   // #getValue
   @Test
   public void getValueReturnsTheValue__Test() {
-    DefaultIdentifier id = new DefaultIdentifier("fooBar");
+    Identifier id = new Identifier("fooBar");
 
     assertThat(id
         .getValue())
@@ -116,7 +116,7 @@ public class DefaultIdentifierTest {
   // #toString
   @Test
   public void toStringReturnsTheValue__Test() {
-    DefaultIdentifier id = new DefaultIdentifier("fooBar");
+    Identifier id = new Identifier("fooBar");
 
     assertThat(id
         .toString())
@@ -127,8 +127,8 @@ public class DefaultIdentifierTest {
   // #equals
   @Test
   public void equalsReturnsTrue__WhenIdentifiersAreEqual__Test() {
-    DefaultIdentifier alpha1 = new DefaultIdentifier("alpha");
-    DefaultIdentifier alpha2 = new DefaultIdentifier("alpha");
+    Identifier alpha1 = new Identifier("alpha");
+    Identifier alpha2 = new Identifier("alpha");
 
     assertThat(alpha1
         .equals(alpha2))
@@ -137,8 +137,8 @@ public class DefaultIdentifierTest {
 
   @Test
   public void equalsReturnsFalse__WhenIdentifiersAreNotEqual__Test() {
-    DefaultIdentifier alpha = new DefaultIdentifier("alpha");
-    DefaultIdentifier beta = new DefaultIdentifier("beta");
+    Identifier alpha = new Identifier("alpha");
+    Identifier beta = new Identifier("beta");
 
     assertThat(alpha
         .equals(beta))
@@ -148,8 +148,8 @@ public class DefaultIdentifierTest {
   // #hashCode
   @Test
   public void hashCodeIsTheSame__WhenIdentifiersAreEqual__Test() {
-    DefaultIdentifier alpha1 = new DefaultIdentifier("alpha");
-    DefaultIdentifier alpha2 = new DefaultIdentifier("alpha");
+    Identifier alpha1 = new Identifier("alpha");
+    Identifier alpha2 = new Identifier("alpha");
 
     assertThat(alpha1.hashCode())
         .isEqualTo(alpha2.hashCode());
@@ -157,8 +157,8 @@ public class DefaultIdentifierTest {
 
   @Test
   public void hashCodeIsDifferent__WhenIdentifiersAreNotEqual__Test() {
-    DefaultIdentifier alpha = new DefaultIdentifier("alpha");
-    DefaultIdentifier beta = new DefaultIdentifier("beta");
+    Identifier alpha = new Identifier("alpha");
+    Identifier beta = new Identifier("beta");
 
     assertThat(alpha.hashCode())
         .isNotEqualTo(beta.hashCode());

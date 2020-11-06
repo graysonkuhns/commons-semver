@@ -12,20 +12,20 @@ class IdentifierFactory {
      * Creates an [Identifier].
      */
     fun create(value: String): Identifier {
-        return DefaultIdentifier(value)
+        return Identifier(value)
     }
 
     /**
      * Creates an [Identifier].
      */
     fun create(value: Int): Identifier {
-        return DefaultIdentifier(value)
+        return Identifier(value)
     }
 
     /**
      * Creates an [Identifier].
      */
     fun create(value: Long): Identifier {
-        return DefaultIdentifier(value)
+        return Identifier(value)
     }
 }
